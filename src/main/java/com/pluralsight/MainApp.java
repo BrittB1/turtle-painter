@@ -41,7 +41,7 @@ public class MainApp {
                     addShape();
                     break;
                 case 2:
-                    //TODO: make saveImage();
+                    saveImage();
                     break;
                 case 0:
                     System.out.println("See ya later");
@@ -52,7 +52,6 @@ public class MainApp {
 
             }
         }
-
     }
 
     public static void addShape () {
@@ -128,6 +127,11 @@ public class MainApp {
             }
         };
     }
-
+public static void saveImage(){
+    System.out.println("Give your masterpiece a file name (ex; Sunset.png): ");
+    String fileName = keyboard.nextLine();
+    world.saveAs(fileName);
+    System.out.println("Saved file: " + fileName + " successfully!");
+}
 }
 

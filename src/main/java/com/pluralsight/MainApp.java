@@ -1,45 +1,108 @@
 package com.pluralsight;// Abstract Window Toolkit - Java's library for making GUIs
 import java.awt.*;
+import java.util.Scanner;
 
-public class MainApp
-{
-    public static void main(String[] args)
-    {
-        // This starter code to get you familiar with how
-        // the TurtleLogo application works
+public class MainApp {
+
+    static Scanner keyboard = new Scanner(System.in);
+    static  World world;
+    static Turtle turtle;
+
+    public static void main(String[] args) {
+
+        System.out.println("Please enter canvas height (px): ");
+        int canvasHeight = keyboard.nextInt();
+
+        System.out.println("Please enter canvas width (px): ");
+        int canvasWidth = keyboard.nextInt();
 
         //Creates com.pluralsight.World object (canvas) and sets height + width at 200 pixels
-        World world = new World(200, 200);
+        world = new World(canvasWidth,canvasHeight);
 
         // Creates com.pluralsight.Turtle object and sets starting position
-        Turtle turtle = new Turtle(world,-100, -100);
-
-        // storing dimensions for diagonal calculation
-        int width = 200;
-        int height = 200;
-
-        // calculate the hypotenuse (diagonal)
-        // a2 + b2 = c2
-/* pythagorean theorem: calculates diagonal distance across the canvas
-/* Math.pow(width,2) - width² | Math.sqrt - square root | c² = a² + b² → c = √(a² + b²)
- */
-        double widthSquared = Math.pow(width, 2);
-        double heightSquared = Math.pow(height, 2);
-        double hypotenuse = Math.sqrt(widthSquared + heightSquared);
-
-
-        turtle.setPenWidth(3);
-        turtle.setColor(Color.GREEN);
-
-        turtle.turnRight(45);
-        turtle.forward(hypotenuse);
-
-        // pen.Up - lifts been so it doesn't draw
+        turtle = new Turtle(world,0, 0);
         turtle.penUp();
-        turtle.goTo(100, 100);
-        turtle.turnRight(90);
 
-        turtle.penDown();
-        turtle.forward(hypotenuse);
+        boolean running = true;
+        while (running) {
+            System.out.println("---------------------------");
+            System.out.println(          "\n MENU "          );
+            System.out.println("---------------------------");
+            System.out.println("1. Add Shape");
+            System.out.println("2. Save image");
+            System.out.println("0. EXIT");
+            System.out.print("Enter your choice: ");
+
+            int choice = keyboard.nextInt();
+            keyboard.nextLine();
+
+            switch (choice){
+                case 1:
+                    addShape();
+                    break;
+                case 2:
+                    //TODO: make saveImage();
+                    break;
+                case 0:
+                    System.out.println("See ya later");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("OOPS! Invalid option");
+
+            }
+        }
+
+    }
+
+    public static void addShape () {
+        System.out.println("\n--- Add Shape ---");
+        System.out.println("Which shape?");
+        System.out.println("1. Square");
+        System.out.println("2. Circle");
+        System.out.println("3. Triangle");
+        System.out.print("Enter choice: ");
+
+        int shapeChoice = keyboard.nextInt();
+        keyboard.nextLine();
+
+        System.out.println("Enter border width: ");
+        System.out.print("Width: ");
+        int borderWidth = keyboard.nextInt();
+
+        System.out.println("Pick a border color by name (Red \uD83D\uDD34 | Blue \uD83D\uDD35 | Green \uD83D\uDFE2 | Yellow \uD83D\uDFE1 | Black ⚫) : ");
+        System.out.print("Color: ");
+        String borderColor = keyboard.nextLine();
+        Color color = getColorFromString(borderColor);
+
+        System.out.print("Enter x coordinate: ");
+        System.out.print("X: ");
+        double x = keyboard.nextDouble();
+
+        System.out.print("Enter y coordinate: ");
+        System.out.print("Y: ");
+        double y = keyboard.nextDouble();
+
+    }
+
+    private static Color getColorFromString(String borderColor) {
+
+        switch (borderColor.toLowerCase()) {
+            case "red":
+                return Color.RED;
+            case "blue":
+                return Color.BLUE;
+            case "green":
+                return Color.GREEN;
+            case "yellow":
+                return Color.YELLOW;
+            case "black":
+                return Color.BLACK;
+
+            default:
+                System.out.println("Invalid color choice. Using black");
+                return Color.BLACK;
+        }
+
     }
 }

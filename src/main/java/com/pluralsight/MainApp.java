@@ -26,7 +26,7 @@ public class MainApp {
         boolean running = true;
         while (running) {
             System.out.println("---------------------------");
-            System.out.println(          "\n MENU "          );
+            System.out.println("           MENU");
             System.out.println("---------------------------");
             System.out.println("1. Add Shape");
             System.out.println("2. Save image");
@@ -127,11 +127,12 @@ public class MainApp {
             }
         };
     }
-public static void saveImage(){
-    System.out.println("Give your masterpiece a file name (ex; Sunset.png): ");
-    String fileName = keyboard.nextLine();
-    world.saveAs(fileName);
-    System.out.println("Saved file: " + fileName + " successfully!");
-}
+
+    public static void saveImage() {
+        System.out.println("Give your masterpiece a file name (ex; Sunset.png): ");
+        String fileName = keyboard.nextLine();
+        world.saveAs(fileName);
+        System.out.println("Saved file: " + fileName + " successfully!");
+    }
 }
 

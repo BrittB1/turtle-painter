@@ -69,6 +69,7 @@ public class MainApp {
         System.out.println("Enter border width: ");
         System.out.print("Width: ");
         int borderWidth = keyboard.nextInt();
+        keyboard.nextLine();
 
         System.out.println("Pick a border color by name (Red \uD83D\uDD34 | Blue \uD83D\uDD35 | Green \uD83D\uDFE2 | Yellow \uD83D\uDFE1 | Black ⚫) : ");
         System.out.print("Color: ");
@@ -82,27 +83,51 @@ public class MainApp {
         System.out.print("Enter y coordinate: ");
         System.out.print("Y: ");
         double y = keyboard.nextDouble();
+        keyboard.nextLine();
 
-    }
+        Shape shape = null;
 
-    private static Color getColorFromString(String borderColor) {
-
-        switch (borderColor.toLowerCase()) {
-            case "red":
-                return Color.RED;
-            case "blue":
-                return Color.BLUE;
-            case "green":
-                return Color.GREEN;
-            case "yellow":
-                return Color.YELLOW;
-            case "black":
-                return Color.BLACK;
+        switch (shapeChoice){
+            case 1:
+                System.out.println("Enter side length: ");
+                double size = keyboard.nextDouble();
+                keyboard.nextLine();
+                shape = new Square(x,y,borderWidth,turtle,color,size);
+                break;
+            case 2:
+                System.out.println("Enter radius: ");
+                double radius = keyboard.nextDouble();
+                keyboard.nextLine();
+                shape = new Circle(x,y,borderWidth,turtle,color,radius);
+                break;
+            case 3:
+                System.out.println("Enter side length: ");
+                double side = keyboard.nextDouble();
+                keyboard.nextLine();
+                shape = new Triangle(x,y,borderWidth,turtle,color,side);
+                break;
 
             default:
-                System.out.println("Invalid color choice. Using black");
-                return Color.BLACK;
+                System.out.println("OOPS! Invalid shape choice");
+                return;
         }
-
+        shape.paint();
+        System.out.println("Shape added to canvas!");
     }
+    private static Color getColorFromString(String borderColor) {
+
+        return switch (borderColor.toLowerCase()) {
+            case "red" -> Color.RED;
+            case "blue" -> Color.BLUE;
+            case "green" -> Color.GREEN;
+            case "yellow" -> Color.YELLOW;
+            case "black" -> Color.BLACK;
+            default -> {
+                System.out.println("Invalid color choice. Using black");
+                yield Color.BLACK;
+            }
+        };
+    }
+
 }
+

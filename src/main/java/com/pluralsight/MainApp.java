@@ -1,4 +1,4 @@
-// Abstract Window Toolkit - Java's library for making GUIs
+package com.pluralsight;// Abstract Window Toolkit - Java's library for making GUIs
 import java.awt.*;
 
 public class MainApp
@@ -8,10 +8,10 @@ public class MainApp
         // This starter code to get you familiar with how
         // the TurtleLogo application works
 
-        //Creates World object (canvas) and sets height + width at 200 pixels
+        //Creates com.pluralsight.World object (canvas) and sets height + width at 200 pixels
         World world = new World(200, 200);
 
-        // Creates Turtle object and sets starting position
+        // Creates com.pluralsight.Turtle object and sets starting position
         Turtle turtle = new Turtle(world,-100, -100);
 
         // storing dimensions for diagonal calculation
